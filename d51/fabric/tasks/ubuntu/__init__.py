@@ -63,6 +63,8 @@ def add_sudoer_user(user):
 
 def remove_user(user_to_remove=None, remove_files=False):
     """Remove the user, optionally removing all files"""
+    if not user_to_remove:
+        user_to_remove = os.environ['USER']
     sudo("/usr/sbin/userdel %s" % user_to_remove)
     if remove_files:
         sudo("rm -rf /home/%s" % user_to_remove)
